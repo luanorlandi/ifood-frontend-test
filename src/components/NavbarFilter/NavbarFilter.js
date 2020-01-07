@@ -15,16 +15,16 @@ const NavbarFilter = () => {
   const isLoadingFilters = filters === null;
   if (isLoadingFilters) {
     return (
-      <navbar className="navbar-filter">
+      <nav className="navbar-filter">
         <span>loading...</span>
-      </navbar>
+      </nav>
     );
   }
 
   return (
-    <navbar className="navbar-filter">
+    <nav className="navbar-filter">
       <Filters filters={filters} />
-    </navbar>
+    </nav>
   );
 };
 

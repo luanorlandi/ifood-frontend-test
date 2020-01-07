@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 
+import SearchContext from '../../contexts/SearchContext';
 import Input from '../Form/Input/Input';
 import SelectInput from '../Form/SelectInput/SelectInput';
 import Datepicker from '../Form/Datepicker/Datepicker';
@@ -17,13 +18,14 @@ const parseInitialValues = (filters) => (
 );
 
 const Filters = ({ filters }) => {
+  const { setSearch } = useContext(SearchContext);
   const formik = useFormik({
     initialValues: {
       name: '',
       ...parseInitialValues(filters),
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      setSearch(values);
     },
   });
 
@@ -40,7 +42,7 @@ const Filters = ({ filters }) => {
       return <Input type="number" formik={formik} field={filter} key={filter.id} />;
     }
 
-    throw new Error(`Unknow filter type '${filter.id}'`);
+    throw new Error(`Unknow filter type in '${filter.id}'`);
   };
 
   return (
@@ -50,7 +52,6 @@ const Filters = ({ filters }) => {
         renderFilter(filter)
       ))}
       <button className="button is-primary" type="submit">Buscar</button>
-      {/* <pre>{JSON.stringify(formik, null, 2)}</pre> */}
     </form>
   );
 };

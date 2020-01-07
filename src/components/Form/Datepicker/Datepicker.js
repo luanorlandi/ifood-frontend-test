@@ -7,7 +7,7 @@ import './Datepicker.scss';
 
 const Datepicker = ({ formik, field }) => (
   <div className="datepicker field">
-    <label htmlForm={field.id}>{field.name}</label>
+    <label htmlFor={field.id}>{field.name}</label>
     <DatePicker // TODO ajustar para mobile usar type nativo de calendario
       selected={formik.values[field.id]}
       onChange={(date) => formik.setFieldValue(field.id, date)}

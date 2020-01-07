@@ -9,7 +9,9 @@ const SelectInput = ({ formik, field }) => (
     <div className="select">
       <select id={field.id} onChange={formik.handleChange}>
         {field.values.map((option) => (
-          <option value={option.value}>{option.name}</option>
+          <option key={option.value} value={option.value}>
+            {option.name}
+          </option>
         ))}
       </select>
     </div>

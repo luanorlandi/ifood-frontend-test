@@ -17,7 +17,7 @@ const Input = ({ formik, field, type }) => (
 Input.propTypes = {
   formik: PropTypes.object.isRequired,
   field: PropTypes.object.isRequired,
-  type: PropTypes.object,
+  type: PropTypes.string,
 };
 
 Input.defaultProps = {
