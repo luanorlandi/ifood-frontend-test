@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 
+import Input from '../Form/Input/Input';
+import SelectInput from '../Form/SelectInput/SelectInput';
+import Datepicker from '../Form/Datepicker/Datepicker';
+import './Filters.scss';
+
 const parseInitialValues = (filters) => (
   filters.reduce((accumulator, filter) => (
     {
@@ -10,14 +15,6 @@ const parseInitialValues = (filters) => (
     }
   ), {})
 );
-
-const isSelectInput = (filter) => {
-  if (filter.values) {
-    return true;
-  }
-
-  return false;
-};
 
 const Filters = ({ filters }) => {
   const formik = useFormik({
@@ -30,42 +27,30 @@ const Filters = ({ filters }) => {
     },
   });
 
+  const renderFilter = (filter) => {
+    if (filter.values) {
+      return <SelectInput formik={formik} field={filter} key={filter.id} />;
+    }
+
+    if (filter.validation && filter.validation.entityType === 'DATE_TIME') {
+      return <Datepicker formik={formik} field={filter} key={filter.id} />;
+    }
+
+    if (filter.validation && filter.validation.primitiveType === 'INTEGER') {
+      return <Input type="number" formik={formik} field={filter} key={filter.id} />;
+    }
+
+    throw new Error(`Unknow filter type '${filter.id}'`);
+  };
+
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="name">Nome</label>
-      <input
-        id="name"
-        name="name"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.name}
-      />
+    <form className="filters" onSubmit={formik.handleSubmit}>
+      <Input formik={formik} field={{ name: 'Nome da música', id: 'name' }} />
       {filters.map((filter) => (
-        isSelectInput(filter) ? (
-          <div key={filter.id}>
-            <label htmlFor={filter.id}>{filter.name}</label>
-            <input
-              id={filter.id}
-              name={filter.id}
-              onChange={formik.handleChange}
-              value={formik.values.email}
-            />
-          </div>
-        ) : (
-          <div key={filter.id}>
-            <label htmlFor={filter.id}>{filter.name}</label>
-            <input
-              id={filter.id}
-              name={filter.id}
-              type="text" // TODO handle input type number (useful for mobile keyboard)
-              onChange={formik.handleChange}
-              value={formik.values[filter.id]}
-            />
-          </div>
-        )
+        renderFilter(filter)
       ))}
-      <button type="submit">Submit</button>
-      <pre>{JSON.stringify(formik, null, 2)}</pre>
+      <button className="button is-primary" type="submit">Buscar</button>
+      {/* <pre>{JSON.stringify(formik, null, 2)}</pre> */}
     </form>
   );
 };

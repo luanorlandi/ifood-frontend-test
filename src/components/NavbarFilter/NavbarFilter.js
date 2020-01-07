@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import Filters from '../Filters/Filters';
 import getFilters from '../../api/getFilters';
+import './NavbarFilter.scss';
 
-const Navbar = () => {
+const NavbarFilter = () => {
   const [filters, setFilters] = useState(null);
 
   useEffect(() => {
@@ -13,12 +14,18 @@ const Navbar = () => {
 
   const isLoadingFilters = filters === null;
   if (isLoadingFilters) {
-    return <span>loading...</span>;
+    return (
+      <navbar className="navbar-filter">
+        <span>loading...</span>
+      </navbar>
+    );
   }
 
   return (
-    <Filters filters={filters} />
+    <navbar className="navbar-filter">
+      <Filters filters={filters} />
+    </navbar>
   );
 };
 
-export default Navbar;
+export default NavbarFilter;
