@@ -7,16 +7,18 @@ import './PlaylistCard.scss';
 const PlaylistCard = ({ playlist }) => {
   const { name, description } = playlist;
   const imageUrl = get(playlist, 'images[0].url');
-  const tracksTotal = get(playlist, 'tracks.total');
   const spotifyLink = get(playlist, 'external_urls.spotify');
 
   return (
     <a href={spotifyLink} className="playlist-card">
-      <img src={imageUrl} alt="Capa da playlist" />
+      <img
+        className="playlist-card__image"
+        src={imageUrl}
+        alt="Capa da playlist"
+      />
       <div>
-        <div>{name}</div>
+        <div className="playlist-card__title">{name}</div>
         <div>{description}</div>
-        <div>{tracksTotal}</div>
       </div>
     </a>
   );

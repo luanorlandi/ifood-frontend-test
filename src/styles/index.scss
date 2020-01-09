@@ -1,1 +1,48 @@
+$primary: #ea1d2c;
+
 @import '~bulma/bulma.sass';
+
+// modify the original styles of Bulma
+body {
+  color: #dcdcdc;
+}
+
+.input,
+.textarea,
+.select select {
+  background-color: #3a3a3a;
+  color: #cacaca;
+  border-color: transparent;
+  transition: 200ms;
+}
+
+.input:hover,
+.textarea:hover,
+.select select:hover,
+.is-hovered.input,
+.is-hovered.textarea,
+.select select.is-hovered {
+  border-color: transparent;
+  background-color: #444444;
+}
+
+.input:focus,
+.textarea:focus,
+.select select:focus,
+.is-focused.input,
+.is-focused.textarea,
+.select select.is-focused,
+.input:active,
+.textarea:active,
+.select select:active,
+.is-active.input,
+.is-active.textarea,
+.select select.is-active {
+  border-color: $primary;
+  box-shadow: none;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after,
+.select:not(.is-multiple):not(.is-loading):hover::after {
+  border-color: #cacaca;
+}
