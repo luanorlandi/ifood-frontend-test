@@ -8,6 +8,7 @@ import SelectInput from '../Form/SelectInput/SelectInput';
 import Datepicker from '../Form/Datepicker/Datepicker';
 import './Filters.scss';
 
+// TODO implementar testes de logica nessas funcoes
 const parseInitialValues = (filters) => (
   filters.reduce((accumulator, filter) => (
     {
@@ -17,6 +18,18 @@ const parseInitialValues = (filters) => (
   ), {})
 );
 
+const parseEmptyValues = (values) => {
+  const entries = Object.entries(values);
+
+  return entries.reduce((accumulator, [key, value]) => {
+    if (value === '') {
+      return accumulator;
+    }
+
+    return { ...accumulator, [key]: value };
+  }, {});
+};
+
 const Filters = ({ filters }) => {
   const { setSearch } = useContext(SearchContext);
   const formik = useFormik({
@@ -25,7 +38,8 @@ const Filters = ({ filters }) => {
       ...parseInitialValues(filters),
     },
     onSubmit: (values) => {
-      setSearch(values);
+      const parsedValues = parseEmptyValues(values);
+      setSearch(parsedValues);
     },
   });
 

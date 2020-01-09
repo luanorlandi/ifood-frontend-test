@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import SearchContext from './SearchContext';
 
 const SearchContextProvider = ({ children }) => {
-  const [search, setSearch] = useState({});
+  const [search, setSearch] = useState(null);
 
   return (
     <SearchContext.Provider value={{ search, setSearch }}>
