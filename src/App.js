@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import SearchContextProvider from './contexts/SearchContextProvider';
 import NavbarFilter from './components/NavbarFilter/NavbarFilter';
-import Playlist from './components/Playlist/Playlist';
+import Playlists from './components/Playlists/Playlists';
 import { getToken, setToken } from './api/token';
 import './styles/index.scss';
 
@@ -41,9 +41,10 @@ const App = () => {
       <div style={{ display: 'flex' }}>
         {/* TODO melhorar este estilo inline */}
         <NavbarFilter />
-        <div>
+        <div style={{ width: '100%' }}>
+          {/* TODO melhorar este estilo inline */}
           {isLoggedIn && (
-            <Playlist />
+            <Playlists />
           )}
           {!isLoggedIn && (
             <a href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}>

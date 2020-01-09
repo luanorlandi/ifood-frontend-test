@@ -65,6 +65,7 @@ const Filters = ({ filters }) => {
       {filters.map((filter) => (
         renderFilter(filter)
       ))}
+      {/* TODO fazer sem botão submit */}
       <button className="button is-primary" type="submit">Buscar</button>
     </form>
   );

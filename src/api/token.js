@@ -5,6 +5,7 @@ export const getToken = () => {
   let token = localStorage.getItem('token');
   if (!token) {
     token = queryString.parse(window.location.hash).access_token;
+    // TODO limpar barra de endereço
   }
 
   return token;
