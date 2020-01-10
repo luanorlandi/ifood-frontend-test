@@ -40,6 +40,8 @@ const Filters = ({ filters }) => {
     onSubmit: (values) => {
       const parsedValues = parseEmptyValues(values);
       setSearch(parsedValues);
+      // TODO fazer a busca no componente do form,
+      // salvar resultado no context e usar isSubmitting para loading
     },
   });
 
