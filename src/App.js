@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import SearchContextProvider from './contexts/SearchContextProvider';
+import PlaylistsContextProvider from './contexts/PlaylistsContextProvider';
 import NavbarFilter from './components/NavbarFilter/NavbarFilter';
 import Playlists from './components/Playlists/Playlists';
 import { getToken, setToken } from './api/token';
@@ -37,7 +37,7 @@ const App = () => {
   }
 
   return (
-    <SearchContextProvider>
+    <PlaylistsContextProvider>
       <div style={{ display: 'flex' }}>
         {/* TODO melhorar este estilo inline */}
         <NavbarFilter />
@@ -51,7 +51,7 @@ const App = () => {
           </a>
         )}
       </div>
-    </SearchContextProvider>
+    </PlaylistsContextProvider>
   );
 };
 

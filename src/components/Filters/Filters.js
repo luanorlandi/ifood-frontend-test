@@ -1,47 +1,49 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
+import classNames from 'classnames';
 
-import SearchContext from '../../contexts/SearchContext';
+import PlaylistsContext from '../../contexts/PlaylistsContext';
 import Input from '../Form/Input/Input';
 import SelectInput from '../Form/SelectInput/SelectInput';
 import Datepicker from '../Form/Datepicker/Datepicker';
+import getFeaturedPlaylists from '../../api/getFeaturedPlaylists';
+import constants from '../../constants';
 import './Filters.scss';
+
+const { REFRESH_INTERVAL } = constants;
 
 // TODO implementar testes de logica nessas funcoes
 const parseInitialValues = (filters) => (
   filters.reduce((accumulator, filter) => (
     {
       ...accumulator,
-      [filter.id]: '', // TODO handle types of filter
+      [filter.id]: '',
     }
   ), {})
 );
 
-const parseEmptyValues = (values) => {
-  const entries = Object.entries(values);
-
-  return entries.reduce((accumulator, [key, value]) => {
-    if (value === '') {
-      return accumulator;
-    }
-
-    return { ...accumulator, [key]: value };
-  }, {});
-};
-
 const Filters = ({ filters }) => {
-  const { setSearch } = useContext(SearchContext);
+  const { setPlaylists } = useContext(PlaylistsContext);
+  const intervalId = useRef(null);
   const formik = useFormik({
     initialValues: {
       name: '',
       ...parseInitialValues(filters),
     },
-    onSubmit: (values) => {
-      const parsedValues = parseEmptyValues(values);
-      setSearch(parsedValues);
-      // TODO fazer a busca no componente do form,
-      // salvar resultado no context e usar isSubmitting para loading
+    onSubmit: (values, { setSubmitting }) => {
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
+
+      getFeaturedPlaylists(values)
+        .then((newPlaylists) => {
+          setPlaylists(newPlaylists);
+          intervalId.current = setInterval(() => {
+            getFeaturedPlaylists(values);
+          }, REFRESH_INTERVAL);
+        })
+        .finally(() => setSubmitting(false));
     },
   });
 
@@ -55,6 +57,7 @@ const Filters = ({ filters }) => {
     }
 
     if (filter.validation && filter.validation.primitiveType === 'INTEGER') {
+      // TODO lidar com numero inteiro, impedir float
       return <Input type="number" formik={formik} field={filter} key={filter.id} />;
     }
 
@@ -67,8 +70,14 @@ const Filters = ({ filters }) => {
       {filters.map((filter) => (
         renderFilter(filter)
       ))}
-      {/* TODO fazer sem botão submit */}
-      <button className="button is-primary" type="submit">Buscar</button>
+      <button
+        type="submit"
+        className={classNames('button is-primary', {
+          'is-loading': formik.isSubmitting,
+        })}
+      >
+        Buscar
+      </button>
     </form>
   );
 };
