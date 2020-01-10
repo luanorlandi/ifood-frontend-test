@@ -34,7 +34,6 @@ const Playlists = () => {
   }, [intervalId, restartInterval]);
 
   useEffect(() => {
-    // TODO refresh a cada 30 segundos
     if (search !== null) {
       getFeaturedPlaylists(search)
         .then((newPlaylists) => setPlaylists(newPlaylists));
