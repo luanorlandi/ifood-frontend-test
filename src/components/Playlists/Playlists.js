@@ -43,9 +43,11 @@ const Playlists = () => {
 
   return (
     <div className="playlists">
-      {playlists && playlists.map((playlist) => (
-        <PlaylistCard key={playlist.id} playlist={playlist} />
-      ))}
+      <div className="playlists__cards">
+        {playlists && playlists.map((playlist) => (
+          <PlaylistCard key={playlist.id} playlist={playlist} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -41,17 +41,15 @@ const App = () => {
       <div style={{ display: 'flex' }}>
         {/* TODO melhorar este estilo inline */}
         <NavbarFilter />
-        <div style={{ width: '100%' }}>
-          {/* TODO melhorar este estilo inline */}
-          {isLoggedIn && (
-            <Playlists />
-          )}
-          {!isLoggedIn && (
-            <a href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}>
-              Login with Spotify
-            </a>
-          )}
-        </div>
+        {isLoggedIn && (
+          <Playlists />
+        )}
+        {/* TODO melhorar login */}
+        {!isLoggedIn && (
+          <a href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}>
+            Login with Spotify
+          </a>
+        )}
       </div>
     </SearchContextProvider>
   );

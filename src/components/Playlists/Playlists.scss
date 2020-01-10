@@ -1,9 +1,14 @@
 .playlists {
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), #121212 600px);
+  background-color: #ea1d2c;
+  padding: 20px;
+}
+
+.playlists__cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   grid-auto-rows: auto;
   grid-gap: 20px;
-  padding: 20px;
-  background-image: linear-gradient(rgba(0,0,0,.5),#121212 40%);
-  background-color: #ea1d2c;
 }
