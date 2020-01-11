@@ -1,0 +1,15 @@
+.field {
+  .input--is-white {
+    width: 500px;
+    max-width: 100%;
+    color: #040404;
+    background-color: #fff;
+    border: 0;
+    border-radius: 500px;
+    padding: 0 16px;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+}

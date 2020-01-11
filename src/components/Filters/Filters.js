@@ -28,7 +28,6 @@ const Filters = ({ filters }) => {
   const intervalId = useRef(null);
   const formik = useFormik({
     initialValues: {
-      name: '',
       ...parseInitialValues(filters),
     },
     onSubmit: (values, { setSubmitting }) => {
@@ -66,7 +65,6 @@ const Filters = ({ filters }) => {
 
   return (
     <form className="filters" onSubmit={formik.handleSubmit}>
-      <Input formik={formik} field={{ name: 'Nome da música', id: 'name' }} />
       {filters.map((filter) => (
         renderFilter(filter)
       ))}
