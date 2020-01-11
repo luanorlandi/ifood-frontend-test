@@ -23,7 +23,7 @@ const parseInitialValues = (filters) => (
   ), {})
 );
 
-const Filters = ({ filters }) => {
+const Filters = ({ filters, closeNavbar }) => {
   const { setPlaylists } = useContext(PlaylistsContext);
   const intervalId = useRef(null);
   const formik = useFormik({
@@ -38,6 +38,8 @@ const Filters = ({ filters }) => {
       getFeaturedPlaylists(values)
         .then((newPlaylists) => {
           setPlaylists(newPlaylists);
+          closeNavbar();
+
           intervalId.current = setInterval(() => {
             getFeaturedPlaylists(values);
           }, REFRESH_INTERVAL);
@@ -84,6 +86,11 @@ const Filters = ({ filters }) => {
 
 Filters.propTypes = {
   filters: PropTypes.array.isRequired,
+  closeNavbar: PropTypes.func,
+};
+
+Filters.defaultProps = {
+  closeNavbar: () => {},
 };
 
 export default Filters;
