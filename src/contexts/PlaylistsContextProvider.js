@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PlaylistsContext from './PlaylistsContext';
 
 const PlaylistsContextProvider = ({ children }) => {
-  const [playlists, setPlaylists] = useState([]);
+  const [playlists, setPlaylists] = useState(null);
 
   return (
     <PlaylistsContext.Provider value={{ playlists, setPlaylists }}>

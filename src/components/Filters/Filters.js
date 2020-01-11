@@ -65,16 +65,18 @@ const Filters = ({ filters }) => {
 
   return (
     <form className="filters" onSubmit={formik.handleSubmit}>
-      {filters.map((filter) => (
-        renderFilter(filter)
-      ))}
+      <div className="filters__fields">
+        {filters.map((filter) => (
+          renderFilter(filter)
+        ))}
+      </div>
       <button
         type="submit"
         className={classNames('button is-primary', {
           'is-loading': formik.isSubmitting,
         })}
       >
-        Buscar
+        Buscar playlists
       </button>
     </form>
   );
