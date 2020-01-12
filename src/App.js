@@ -5,6 +5,7 @@ import NavbarFilter from './components/NavbarFilter/NavbarFilter';
 import Playlists from './components/Playlists/Playlists';
 import { getToken, setToken } from './api/token';
 import './styles/index.scss';
+import './App.scss';
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const redirectUri = process.env.REACT_APP_REDIRECT_URL;
@@ -28,27 +29,23 @@ const App = () => {
     return null;
   }
 
-  if (!isLoggedIn) {
-    return (
-      <a href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}>
-        Login with Spotify
-      </a>
-    );
-  }
-
   return (
     <PlaylistsContextProvider>
-      <div style={{ display: 'flex' }}>
-        {/* TODO melhorar este estilo inline */}
-        <NavbarFilter />
+      <div className="app">
         {isLoggedIn && (
-          <Playlists />
+          <>
+            <NavbarFilter />
+            <Playlists />
+          </>
         )}
-        {/* TODO melhorar login */}
         {!isLoggedIn && (
-          <a href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}>
-            Login with Spotify
-          </a>
+          <div className="app__login">
+            <h1 className="app__login-title">Spotifood</h1>
+            <h2 className="app__login-description">Pesquise pelas suas playlists preferidas</h2>
+            <a className="button is-primary" href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}>
+              Fazer login com Spotify
+            </a>
+          </div>
         )}
       </div>
     </PlaylistsContextProvider>

@@ -3,17 +3,19 @@
 .navbar-filter {
   display: flex;
   width: 350px;
-  min-height: 100vh;
   padding: 20px;
   background-color: #040404;
 
   @include touch {
-    position: absolute;
     z-index: 10;
     width: calc(100% - 60px);
     max-width: 600px;
     transform: translate(-100%, 0);
     transition: 200ms;
+    top: 0;
+    position: fixed;
+    overflow: auto;
+    height: 100%;
   }
 }
 
@@ -61,7 +63,7 @@
     width: 100vw;
     height: 100vh;
     background-color: #040404;
-    position: absolute;
+    position: fixed;
     z-index: 9;
     opacity: 0.5;
   }

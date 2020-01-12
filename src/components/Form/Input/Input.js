@@ -23,7 +23,7 @@ const Input = ({
           'input--is-white': styleType === 'white',
         })}
         id={field.id}
-        type={type} // TODO handle input type number (useful for mobile keyboard)
+        type={type}
         placeholder={placeholder}
         onChange={formik.handleChange}
         value={formik.values[field.id]}
