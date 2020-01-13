@@ -1,6 +1,13 @@
 $primary: #ea1d2c;
 
-@import '~bulma/bulma.sass'; // TODO otimizar import do Bulma
+@import '~bulma/sass/utilities/_all.sass';
+@import '~bulma/sass/base/minireset.sass';
+@import '~bulma/sass/base/generic.sass';
+@import '~bulma/sass/elements/button.sass';
+@import '~bulma/sass/form/shared.sass';
+@import '~bulma/sass/form/select.sass';
+@import '~bulma/sass/form/input-textarea.sass';
+@import '~bulma/sass/form/tools.sass';
 
 // modify the original styles of Bulma
 body {
