@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import PlaylistsContextProvider from './contexts/PlaylistsContextProvider';
 import NavbarFilter from './components/NavbarFilter/NavbarFilter';
 import Playlists from './components/Playlists/Playlists';
 import { getToken, setToken } from './api/token';
+import handleResponseError from './api/handleResponseError';
 import './styles/index.scss';
 import './App.scss';
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 const redirectUri = process.env.REACT_APP_REDIRECT_URL;
-// TODO handle auth error https://example.com/callback?error=access_denied&state=STATE
+
+axios.interceptors.response.use(null, handleResponseError);
 
 const App = () => {
   const [isLoadingToken, setIsLoadingToken] = useState(true);
@@ -31,6 +36,12 @@ const App = () => {
 
   return (
     <PlaylistsContextProvider>
+      <ToastContainer
+        position="top-left"
+        autoClose={false}
+        closeOnClick={false}
+        pauseOnVisibilityChange
+      />
       <div className="app">
         {isLoggedIn && (
           <>
@@ -42,7 +53,10 @@ const App = () => {
           <div className="app__login">
             <h1 className="app__login-title">Spotifood</h1>
             <h2 className="app__login-description">Pesquise pelas suas playlists preferidas</h2>
-            <a className="button is-primary" href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}>
+            <a
+              className="button is-primary"
+              href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}
+            >
               Fazer login com Spotify
             </a>
           </div>

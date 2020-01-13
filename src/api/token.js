@@ -17,3 +17,7 @@ export const setToken = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`; // TODO handle other types of token
   // TODO handle token expiration
 };
+
+export const clearToken = () => {
+  localStorage.removeItem('token');
+};

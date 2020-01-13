@@ -74,7 +74,7 @@ const Filters = ({ filters, closeNavbar }) => {
       </div>
       <button
         type="submit"
-        className={classNames('button is-primary', {
+        className={classNames('button is-primary is-fullwidth', {
           'is-loading': formik.isSubmitting,
         })}
       >

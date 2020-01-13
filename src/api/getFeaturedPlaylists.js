@@ -18,7 +18,6 @@ const getFeaturedPlaylists = async (values) => {
   const response = await axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
     params: parsedValues,
   });
-  // TODO lidar com erros, como o caso de pais Russia que nao tem playlists
 
   return response.data.playlists.items;
 };
