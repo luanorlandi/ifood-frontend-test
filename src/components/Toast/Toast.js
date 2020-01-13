@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import './Toast.scss';
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
-const redirectUri = process.env.REACT_APP_REDIRECT_URL;
+const redirectUri = process.env.NODE_ENV === 'development'
+  ? process.env.REACT_APP_REDIRECT_URL_DEV
+  : process.env.REACT_APP_REDIRECT_URL;
 
 const Toast = ({ sessionExpired, errorMessage }) => {
   if (sessionExpired) {
