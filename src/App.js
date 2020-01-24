@@ -8,11 +8,11 @@ import NavbarFilter from './components/NavbarFilter/NavbarFilter';
 import Playlists from './components/Playlists/Playlists';
 import { getToken, setToken } from './api/token';
 import handleResponseError from './api/handleResponseError';
+import constants from './constants';
 import './styles/index.scss';
 import './App.scss';
 
-const clientId = process.env.REACT_APP_CLIENT_ID;
-const redirectUri = process.env.REACT_APP_REDIRECT_URL;
+const { CLIENT_ID, REDIRECT_URL } = constants;
 
 axios.interceptors.response.use(null, handleResponseError);
 
@@ -55,7 +55,7 @@ const App = () => {
             <h2 className="app__login-description">Pesquise pelas suas playlists preferidas</h2>
             <a
               className="button is-primary"
-              href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}
+              href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URL)}`}
             >
               Fazer login com Spotify
             </a>

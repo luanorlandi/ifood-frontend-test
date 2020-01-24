@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
@@ -40,6 +40,7 @@ const Filters = ({ filters, closeNavbar }) => {
           setPlaylists(newPlaylists);
           closeNavbar();
 
+          // refresh playlists to update the result in case of changes
           intervalId.current = setInterval(() => {
             getFeaturedPlaylists(values);
           }, REFRESH_INTERVAL);
@@ -47,6 +48,11 @@ const Filters = ({ filters, closeNavbar }) => {
         .finally(() => setSubmitting(false));
     },
   });
+
+  useEffect(() => {
+    getFeaturedPlaylists({})
+      .then((newPlaylists) => setPlaylists(newPlaylists));
+  }, [setPlaylists]);
 
   const renderFilter = (filter) => {
     if (filter.values) {

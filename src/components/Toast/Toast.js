@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import constants from '../../constants';
 import './Toast.scss';
 
-const clientId = process.env.REACT_APP_CLIENT_ID;
-const redirectUri = process.env.NODE_ENV === 'development'
-  ? process.env.REACT_APP_REDIRECT_URL_DEV
-  : process.env.REACT_APP_REDIRECT_URL;
+const { CLIENT_ID, REDIRECT_URL } = constants;
 
 const Toast = ({ sessionExpired, errorMessage }) => {
   if (sessionExpired) {
@@ -16,7 +14,7 @@ const Toast = ({ sessionExpired, errorMessage }) => {
         <div>
           <a
             className="button is-primary is-small"
-            href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`}
+            href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URL)}`}
           >
             Fazer login novamente
           </a>
