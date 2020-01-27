@@ -1,9 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react'; // TODO ver se mantem esta lib
+import { render } from '@testing-library/react';
+
 import App from './App';
 
-test('renders learn react link', () => {
+test('first render with Spotifood title', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/Spotifood/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(getByText(/Spotifood/i)).toBeInTheDocument();
 });

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`playlist card match snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="playlist-card"
+    href="https://open.spotify.com/playlist/37i9dQZF1DWZd79rJ6a7lp"
+  >
+    <img
+      alt="Capa da playlist"
+      class="playlist-card__image"
+      src="https://i.scdn.co/image/ab67706f00000002b70e0223f544b1faa2e95ed0"
+    />
+    <div>
+      <div
+        class="playlist-card__title"
+      >
+        Sleep
+      </div>
+      <div>
+        Gentle ambient piano to help you fall asleep.
+      </div>
+    </div>
+  </a>
+</DocumentFragment>
+`;
