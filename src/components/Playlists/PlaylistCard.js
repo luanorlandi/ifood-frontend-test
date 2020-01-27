@@ -25,7 +25,12 @@ const PlaylistCard = ({ playlist }) => {
 };
 
 PlaylistCard.propTypes = {
-  playlist: PropTypes.object.isRequired,
+  playlist: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    images: PropTypes.array,
+    external_urls: PropTypes.object,
+  }).isRequired,
 };
 
 export default PlaylistCard;

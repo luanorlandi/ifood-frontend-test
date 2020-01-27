@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import PlaylistsContext from './PlaylistsContext';
 
-const PlaylistsContextProvider = ({ children }) => {
-  const [playlists, setPlaylists] = useState(null);
+const PlaylistsContextProvider = ({ children, initialPlaylists }) => {
+  const [playlists, setPlaylists] = useState(initialPlaylists);
 
   return (
     <PlaylistsContext.Provider value={{ playlists, setPlaylists }}>
@@ -15,6 +15,11 @@ const PlaylistsContextProvider = ({ children }) => {
 
 PlaylistsContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  initialPlaylists: PropTypes.array,
+};
+
+PlaylistsContextProvider.defaultProps = {
+  initialPlaylists: null,
 };
 
 export default PlaylistsContextProvider;

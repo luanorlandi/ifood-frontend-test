@@ -12,16 +12,14 @@ const Datepicker = ({ formik, field }) => {
   return (
     <div className="datepicker field">
       <label htmlFor={field.id}>{field.name}</label>
+      {/* render a nice interface with datepicker instead of the native on desktop */}
       {!isTouch && (
         <DatePicker
+          id={field.id}
           selected={formik.values[field.id]}
           onChange={(date) => formik.setFieldValue(field.id, date)}
           showTimeSelect
           timeIntervals={60}
-          timeCaption="Horário"
-          locale="pt-BR"
-          timeFormat="p"
-          dateFormat="Pp"
           className="input"
         />
       )}

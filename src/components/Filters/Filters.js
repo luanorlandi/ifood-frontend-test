@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
@@ -13,7 +13,6 @@ import './Filters.scss';
 
 const { REFRESH_INTERVAL } = constants;
 
-// TODO implementar testes de logica nessas funcoes
 const parseInitialValues = (filters) => (
   filters.reduce((accumulator, filter) => (
     {
@@ -27,9 +26,7 @@ const Filters = ({ filters, closeNavbar }) => {
   const { setPlaylists } = useContext(PlaylistsContext);
   const intervalId = useRef(null);
   const formik = useFormik({
-    initialValues: {
-      ...parseInitialValues(filters),
-    },
+    initialValues: parseInitialValues(filters),
     onSubmit: (values, { setSubmitting }) => {
       if (intervalId.current) {
         clearInterval(intervalId.current);
@@ -42,17 +39,14 @@ const Filters = ({ filters, closeNavbar }) => {
 
           // refresh playlists to update the result in case of changes
           intervalId.current = setInterval(() => {
-            getFeaturedPlaylists(values);
+            getFeaturedPlaylists(values)
+              .then((refreshedPlaylists) => setPlaylists(refreshedPlaylists))
+              .catch(() => clearInterval(intervalId.current));
           }, REFRESH_INTERVAL);
         })
         .finally(() => setSubmitting(false));
     },
   });
-
-  useEffect(() => {
-    getFeaturedPlaylists({})
-      .then((newPlaylists) => setPlaylists(newPlaylists));
-  }, [setPlaylists]);
 
   const renderFilter = (filter) => {
     if (filter.values) {
@@ -64,7 +58,6 @@ const Filters = ({ filters, closeNavbar }) => {
     }
 
     if (filter.validation && filter.validation.primitiveType === 'INTEGER') {
-      // TODO lidar com numero inteiro, impedir float
       return <Input type="number" formik={formik} field={filter} key={filter.id} />;
     }
 

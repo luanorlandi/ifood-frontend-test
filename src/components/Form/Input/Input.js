@@ -27,8 +27,9 @@ const Input = ({
         placeholder={placeholder}
         onChange={formik.handleChange}
         value={formik.values[field.id]}
-        min={min}
+        min={min || 0}
         max={max}
+        step="1"
       />
     </div>
   );
